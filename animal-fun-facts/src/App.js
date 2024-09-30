@@ -1,24 +1,20 @@
+import React from 'react';
 import { animals } from './animals';
-import { React } from 'react';
-import { createRoot } from 'react-dom/client';
-
-const container = document.getElementById('app');
-const root = createRoot(container);
+import './App.css';
 
 const title = "";
 const background = (
   <img 
-    class = 'background'
-    alt = 'ocean'
-    src = '/images/ocean.jpg'
-    />
+    className='background'
+    alt='ocean'
+    src='/images/ocean.jpg'
+  />
 );
 
 const images = [];
 for (const animal in animals) {
   images.push(
     <img
-      onClick ={displayFact}
       key={animal}
       className='animal'
       alt={animal}
@@ -29,31 +25,20 @@ for (const animal in animals) {
   );
 }
 
-function displayFact(e) {
-  const animal = e.target.alt;
-  const index = Math.floor(Math.random() * animals[animal].facts.length);
-  const fact = animals[animal].facts[index];
-  const p = document.getElementById('fact');
-  p.innerHTML = fact;
-  }
-
-const showBackground = true;
-
-
 const animalFacts = (
   <div>
-    {showBackground && background}
+    {background}
     <h1>
-      {title || "Click an animal for a fun fact"}
+      {title === "" ? "Click an animal for a fun fact" : title}
     </h1>
-    <div className='animals'>{images}</div>
-    <p id='fact'></p>
+    <div className='animals'>
+      {images}
+    </div>
   </div>
 );
-root.render(animalFacts);
 
+function App() {
+  return animalFacts;
+}
 
-
-
-
-
+export default App;
